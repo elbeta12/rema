@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rematch</title>
+  <style>
+    :root {
+      --bg: #0b1210;
+      --panel: #14221b;
+      --accent: #00ff84;
+      --accent-dark: #00cc66;
+      --text: #e9f9ef;
+      --muted: #9ab6a7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Splash */
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      z-index: 100;
+      animation: fadeOut 2.8s forwards;
+    }
+
+    #splash img {
+      width: 140px;
+      height: 140px;
+      filter: drop-shadow(0 0 15px var(--accent));
+      animation: zoomIn 2s ease;
+    }
+
+    #splash h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      text-shadow: 0 0 15px var(--accent);
+      animation: fadeIn 2.2s ease;
+    }
+
+    @keyframes zoomIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeOut { 0% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 18px rgba(0,255,132,0.6);
+    }
+    header h2 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: .5rem;
+    }
+    header p { color: var(--muted); }
+
+    /* Secciones */
+    .section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 3rem 1rem;
+      border-top: 1px solid #1e3326;
+    }
+    .section img {
+      width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.5);
+    }
+    .section .text { max-width: 500px; }
+    .section h3 { font-size: 1.8rem; margin-bottom: .6rem; color: var(--accent); }
+    .section p { line-height: 1.6; color: var(--muted); margin-bottom: 1rem; }
+
+    /* Botón */
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      background: var(--accent);
+      color: #0b1510;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(0, 255, 132, 0.6);
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: var(--accent-dark);
+      box-shadow: 0 0 18px rgba(0, 255, 132, 0.9);
+      transform: scale(1.05);
+    }
+
+    /* Banner lateral */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      right: -50%;
+      width: 50%;
+      height: 100%;
+      background: var(--panel);
+      color: var(--text);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.7);
+      transition: right 0.4s ease;
+      padding: 2rem;
+      z-index: 200;
+      overflow-y: auto;
+    }
+    #sidebar.active { right: 0; }
+    #sidebar h3 { color: var(--accent); margin-bottom: 1rem; }
+    #sidebar p { color: var(--muted); line-height: 1.6; }
+    #sidebar .close-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+      font-size: .9rem;
+      border-top: 1px solid #1e3326;
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash -->
+  <div id="splash">
+    <img src="EX.png" alt="Logo Rematch">
+    <h1>Rematch</h1>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">✖</button>
+    <h3 id="sidebar-title">Más información</h3>
+    <p id="sidebar-content">Aquí aparecerá el contenido dinámico al dar clic en los botones de cada sección.</p>
+  </div>
+
+  <header>
+    <img src="EX.png" alt="Logo Principal">
+    <h2>🏆 Bienvenido a Rematch</h2>
+    <p>Explora campeones, MVPs, historia y leyendas.</p>
+  </header>
+
+  <section class="section">
+    <img src="https://via.placeholder.com/300x200" alt="Campeones">
+    <div class="text">
+      <h3>Campeones</h3>
+      <p>Equipos que lograron alzarse con el título, mostrando esfuerzo, dedicación y gloria.</p>
+      <button class="btn" onclick="openSidebar('Campeones','Lista de campeones históricos con fotos, estadísticas y trofeos.')">Ver más</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <h3>MVP</h3>
+      <p>Los jugadores más valiosos que marcaron la diferencia en cada temporada.</p>
+      <button class="btn" onclick="openSidebar('MVP','Detalles de los jugadores MVP de cada torneo, con estadísticas y curiosidades.')">Detalles</button>
+    </div>
+    <img src="https://via.placeholder.com/300x200" alt="MVP">
+  </section>
+
+  <section class="section">
+    <img src="https://via.placeholder.com/300x200" alt="Historia">
+    <div class="text">
+      <h3>Historia</h3>
+      <p>Momentos inolvidables, remontadas épicas y partidos que definieron épocas.</p>
+      <button class="btn" onclick="openSidebar('Historia','Resumen de partidos históricos, remontadas y momentos legendarios.')">Leer</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <h3>Leyendas</h3>
+      <p>Jugadores y equipos que dejaron huella eterna en la comunidad.</p>
+      <button class="btn" onclick="openSidebar('Leyendas','Perfil de las grandes leyendas, con fotos, trayectoria y logros.')">Explorar</button>
+    </div>
+    <img src="https://via.placeholder.com/300x200" alt="Leyendas">
+  </section>
+
+  <footer>
+    © 2025 Rematch. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function openSidebar(title, content) {
+      document.getElementById("sidebar-title").innerText = title;
+      document.getElementById("sidebar-content").innerText = content;
+      document.getElementById("sidebar").classList.add("active");
+    }
+    function closeSidebar() {
+      document.getElementById("sidebar").classList.remove("active");
+    }
+  </script>
+</body>
+</html>
