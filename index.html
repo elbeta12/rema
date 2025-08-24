@@ -16,7 +16,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", monospace; }
     body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-   
     /* Header */
     header {
       text-align: center;
@@ -104,12 +103,16 @@
       margin-top: 2rem;
     }
   </style>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
 </head>
 <body>
 
-
-  <!-- Contenido -->
-  <div id="content" style="display:none;">
+  <div id="content">
     <header>
       <img src="EX.png" alt="Logo Rematch">
       <h1>Rematch</h1>
