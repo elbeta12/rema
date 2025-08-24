@@ -16,29 +16,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", monospace; }
     body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-    /* Pantalla de carga */
-    #loading {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 1000;
-      color: var(--accent);
-      font-size: 1.4rem;
-    }
-    #loading span {
-      border-right: 2px solid var(--accent);
-      padding-right: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 3s steps(20) forwards, blink 0.7s infinite;
-    }
-    @keyframes typing { from { width: 0; } to { width: 100%; } }
-    @keyframes blink { 50% { border-color: transparent; } }
-
+   
     /* Header */
     header {
       text-align: center;
@@ -128,8 +106,7 @@
   </style>
 </head>
 <body>
-  <!-- Pantalla de carga -->
-  <div id="loading"><span>Conectando a Rematch...</span></div>
+
 
   <!-- Contenido -->
   <div id="content" style="display:none;">
