@@ -13,74 +13,104 @@
       --muted: #9ab6a7;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", monospace; }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-    body {
+    /* Pantalla de carga */
+    #loading {
+      position: fixed;
+      inset: 0;
       background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+      color: var(--accent);
+      font-size: 1.4rem;
     }
+    #loading span {
+      border-right: 2px solid var(--accent);
+      padding-right: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3s steps(20) forwards, blink 0.7s infinite;
+    }
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
 
+    /* Header */
     header {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid #1e3326;
     }
     header img {
-      width: 100px;
+      width: 90px;
       border-radius: 50%;
-      margin-bottom: 1rem;
+      margin-bottom: .5rem;
       box-shadow: 0 0 12px rgba(0,255,132,0.5);
     }
-    header h1 {
-      color: var(--accent);
-      font-size: 2.2rem;
-      margin-bottom: .3rem;
-    }
+    header h1 { color: var(--accent); font-size: 2rem; }
     header p { color: var(--muted); }
+    .nav {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .nav button {
+      background: var(--accent);
+      border: none;
+      color: #0b1510;
+      padding: .5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .nav button:hover {
+      background: #00cc66;
+      transform: scale(1.05);
+    }
 
+    .discord-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #5865F2;
+      color: #fff;
+      padding: .6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .discord-btn:hover { background: #4752C4; }
+
+    /* Secciones */
     .section {
+      display: none;
       padding: 2rem 1rem;
       max-width: 800px;
       margin: auto;
-      border-top: 1px solid #1e3326;
     }
-    .section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-      text-align: center;
-    }
-    .section p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      text-align: justify;
-    }
+    .section.active { display: block; animation: fadeIn 0.6s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    .legend {
-      text-align: center;
-      margin-top: 1.5rem;
+    .section h2 { text-align: center; color: var(--accent); margin-bottom: 1rem; }
+    .section p { color: var(--muted); margin-bottom: 1rem; text-align: justify; }
+
+    /* Leyendas */
+    .legend { text-align: center; margin-top: 1.5rem; }
+    .legend img {
+      width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      margin-bottom: 1rem;
     }
-    .legend h3 {
-      color: var(--accent);
-      font-size: 1.5rem;
-      margin-bottom: .5rem;
-    }
-    .legend p {
-      color: var(--muted);
-      margin-bottom: .5rem;
-    }
-    .legend ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .legend ul li {
-      color: var(--text);
+    .legend h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: .5rem; }
+    .legend ul { list-style: none; padding: 0; }
+    .legend li {
       background: var(--panel);
       padding: .6rem 1rem;
       border-radius: 6px;
@@ -98,13 +128,23 @@
   </style>
 </head>
 <body>
-  <header>
-    <img src="EX.png" alt="Logo Rematch">
-    <h1>Rematch</h1>
-    <p>Historia y Leyendas</p>
-  </header>
+  <!-- Pantalla de carga -->
+  <div id="loading"><span>Conectando a Rematch...</span></div>
 
-  <section class="section">
+  <!-- Contenido -->
+  <div id="content" style="display:none;">
+    <header>
+      <img src="EX.png" alt="Logo Rematch">
+      <h1>Rematch</h1>
+      <p>Historia y Leyendas</p>
+      <div class="nav">
+        <button onclick="showSection('historia')">Historia</button>
+        <button onclick="showSection('leyendas')">Leyendas</button>
+      </div>
+      <a class="discord-btn" href="https://discord.gg/4CCKXEFTsZ" target="_blank">Unirse al Discord</a>
+    </header>
+
+  <section id="historia" class="section active">
     <h2>Historia</h2>
     <p><strong>Rematch - 2025</strong></p>
     <p>Corría el año 2024. El ambiente en la comunidad de Haxball estaba algo monótono: las mismas modalidades de siempre, los mismos jugadores dominando, y poca innovación real. Pero como en toda buena historia, todo cambió gracias a una chispa.</p>
@@ -119,24 +159,122 @@
     <p>Porque a veces, todo lo que se necesita para revolucionar un juego… es una buena idea y alguien que se atreva a hacerla realidad.</p>
   </section>
 
-  <section class="section">
-  <h2>Leyendas</h2>
-  <div class="legend">
-    <img src="nic.png" alt="Nicotina" style="width:200px;border-radius:12px;box-shadow:0 0 12px rgba(0,0,0,0.5);margin-bottom:1rem;">
-    <h3>Nicotina</h3>
-    <p><em>Jugador táctico por naturaleza, regateador empedernido y egoísta por elección.</em></p>
-    <p>Siempre juega al borde del lag, pero con un talento que compensa cada milisegundo perdido. 
-       En la cancha, puede desesperarte... o ganarte el partido.</p>
-    <h4>Logros</h4>
-    <ul>
-      <li>Creador de Rematch</li>
-    </ul>
+<section id="leyendas" class="section">
+      <h2>Leyendas</h2>
+      <div class="legend">
+        <img src="nico.png" alt="Nicotina">
+        <h3>Nicotina</h3>
+        <p><em>Jugador táctico por naturaleza, regateador empedernido y egoísta por elección.</em></p>
+        <p>Siempre juega al borde del lag, pero con un talento que compensa cada milisegundo perdido.</p>
+        <h4>Logros</h4>
+        <ul>
+          <li>Creador de Rematch</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      By Kzzr.
+    </footer>
   </div>
-</section>
 
+  <script>
+    // Animación de carga
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }, 3000);
 
-  <footer>
-    © 2025 Rematch. Todos los derechos reservados.
-  </footer>
+    // Mostrar secciones
+    function showSection(id) {
+      document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+
+  <!-- LOADER HACKER -->
+<div id="hacker-loader">
+  <div class="loader-content">
+    <img src="EX.png" alt="Logo Rematch" class="loader-logo">
+    <pre id="hack-text"></pre>
+  </div>
+</div>
+
+<style>
+#hacker-loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.loader-content {
+  text-align: center;
+  color: #00ff99;
+  font-family: "Courier New", monospace;
+}
+
+.loader-logo {
+  width: 120px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 8px #00ff99);
+  animation: pulse 1.5s infinite;
+}
+
+#hack-text {
+  font-size: 16px;
+  text-align: left;
+  white-space: pre-wrap;
+  color: #00ff99;
+  max-width: 600px;
+  margin: auto;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+</style>
+
+<script>
+const hackLines = [
+  "[*] Inicializando protocolo Rematch...",
+  "[*] Estableciendo conexión segura...",
+  "[*] Cargando datos de jugadores...",
+  "[*] Validando autenticación...",
+  "[*] Conectando a Rematch"
+];
+
+let i = 0;
+function typeLine() {
+  if (i < hackLines.length) {
+    const line = hackLines[i];
+    let j = 0;
+    const interval = setInterval(() => {
+      document.getElementById("hack-text").textContent += line[j] || "";
+      j++;
+      if (j === line.length) {
+        document.getElementById("hack-text").textContent += "\n";
+        clearInterval(interval);
+        i++;
+        setTimeout(typeLine, 500);
+      }
+    }, 40); // velocidad de tipeo
+  } else {
+    // ocultar loader
+    setTimeout(() => {
+      document.getElementById("hacker-loader").style.opacity = "0";
+      setTimeout(() => document.getElementById("hacker-loader").style.display = "none", 600);
+    }, 1200);
+  }
+}
+window.addEventListener("load", typeLine);
+</script>
+
 </body>
 </html>
