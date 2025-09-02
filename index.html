@@ -102,6 +102,52 @@
       border-top: 1px solid #1e3326;
       margin-top: 2rem;
     }
+
+    #equipos {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  #equipos h2 {
+    text-align: center;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .team-card {
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+  }
+
+  .team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0,255,132,0.4);
+  }
+
+  .team-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: .5rem;
+  }
+
+  .team-card h4 {
+    color: var(--text);
+    font-size: 1rem;
+    margin: 0;
+  }
   </style>
   <script>
     function showSection(id) {
@@ -120,9 +166,52 @@
       <div class="nav">
         <button onclick="showSection('historia')">Historia</button>
         <button onclick="showSection('leyendas')">Leyendas</button>
+        <button onclick="showSection('equipos')">Equipos</button>
       </div>
       <a class="discord-btn" href="https://discord.gg/4CCKXEFTsZ" target="_blank">Unirse al Discord</a>
     </header>
+
+     <section id="equipos" class="section">
+  <div class="teams-grid">
+    <div class="team-card">
+      <img src="nico 1.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 2.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+    <div class="team-card">
+      <img src="nico 3.png" alt="">
+    </div>
+  </div>
+</section>
+
 
   <section id="historia" class="section active">
     <h2>Historia</h2>
